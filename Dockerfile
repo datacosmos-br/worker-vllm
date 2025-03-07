@@ -1,7 +1,11 @@
 FROM nvidia/cuda:12.1.0-base-ubuntu22.04 
 
-RUN apt-get update -y \
-    && apt-get install -y python3-pip
+RUN apt-get update -y && apt-get install -y \
+    build-essential \
+    cmake \
+    libnuma-dev \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN ldconfig /usr/local/cuda-12.1/compat/
 
@@ -12,8 +16,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     python3 -m pip install --upgrade -r /requirements.txt
 
 # Install vLLM (switching back to pip installs since issues that required building fork are fixed and space optimization is not as important since caching) and FlashInfer 
-RUN python3 -m pip install vllm==0.7.3 && \
-    python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3
+RUN python3 -m pip install vllm==0.7.3
+RUN python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3
 
 # Setup for Option 2: Building the Image with the Model included
 ARG MODEL_NAME=""
@@ -22,6 +26,8 @@ ARG BASE_PATH="/runpod-volume"
 ARG QUANTIZATION=""
 ARG MODEL_REVISION=""
 ARG TOKENIZER_REVISION=""
+COPY josiefied-qwen2.5-14b-instruct-abliterated-v4.Q6_K.gguf josiefied-qwen2.5-14b-instruct-abliterated-v4.Q6_K.gguf
+
 
 ENV MODEL_NAME=$MODEL_NAME \
     MODEL_REVISION=$MODEL_REVISION \
