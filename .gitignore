@@ -4,3 +4,4 @@ runpod.toml
 .env
 test/*
 vllm-base/vllm-*
+josiefied-qwen2.5-14b-instruct-abliterated-v4.Q6_K.gguf
