@@ -420,6 +420,7 @@
       "options": [
         { "value": "auto", "label": "auto" },
         { "value": "pt", "label": "pt" },
+        { "value": "gguf", "label": "gguf" },
         { "value": "safetensors", "label": "safetensors" },
         { "value": "npcache", "label": "npcache" },
         { "value": "dummy", "label": "dummy" },
