@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.0-base-ubuntu22.04 
+FROM nvidia/cuda:12.4.0-devel-ubuntu22.04 AS builder
 
 RUN apt-get update -y \
     && apt-get install -y python3-pip git
@@ -14,6 +14,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Install vLLM (switching back to pip installs since issues that required building fork are fixed and space optimization is not as important since caching) and FlashInfer 
 RUN python3 -m pip install git+https://github.com/vllm-project/vllm@v0.8.0rc2 && \
     python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu124/torch2.5
+
+FROM nvidia/cuda:12.4.0-base-ubuntu22.04
+
+RUN apt-get update -y \
+    && apt-get install -y python3-pip
 
 # Setup for Option 2: Building the Image with the Model included
 ARG MODEL_NAME=""
