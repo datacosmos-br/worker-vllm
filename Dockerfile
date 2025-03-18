@@ -20,6 +20,9 @@ FROM nvidia/cuda:12.4.0-base-ubuntu22.04
 RUN apt-get update -y \
     && apt-get install -y python3-pip
 
+COPY --from=builder /usr/local/lib/python3.10/dist-packages /usr/local/lib/python3.10/dist-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
 # Setup for Option 2: Building the Image with the Model included
 ARG MODEL_NAME=""
 ARG TOKENIZER_NAME=""
