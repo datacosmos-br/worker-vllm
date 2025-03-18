@@ -8,5 +8,5 @@ typing-extensions>=4.8.0
 pydantic
 pydantic-settings
 hf-transfer
-transformers
+git+https://github.com/huggingface/transformers@v4.49.0-Gemma-3#egg=transformers
 bitsandbytes>=0.45.0
