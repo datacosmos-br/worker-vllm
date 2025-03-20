@@ -91,6 +91,8 @@ DEFAULT_ARGS = {
     "disable_logprobs_during_spec_decoding": os.getenv('DISABLE_LOGPROBS_DURING_SPEC_DECODING', None),
     "otlp_traces_endpoint": os.getenv('OTLP_TRACES_ENDPOINT', None),
     "use_v2_block_manager": os.getenv('USE_V2_BLOCK_MANAGER', 'true'),
+    "config_format": os.getenv('CONFIG_FORMAT', None),
+    "limit_mm_per_prompt": {k: int(v) for k, v in (item.split('=') for item in os.getenv('LIMIT_MM_PER_PROMPT', '').split(',')) if v} if os.getenv('LIMIT_MM_PER_PROMPT') else None, # image=10,text=1024 -> {"image": 10, "text": 1024}
 }
 
 def match_vllm_args(args):
@@ -156,14 +158,14 @@ def get_engine_args():
         if os.getenv("MAX_PARALLEL_LOADING_WORKERS"):
             logging.warning("Overriding MAX_PARALLEL_LOADING_WORKERS with None because more than 1 GPU is available.")
     
-    # Deprecated env args backwards compatibility
     if args.get("kv_cache_dtype") == "fp8_e5m2":
         args["kv_cache_dtype"] = "fp8"
         logging.warning("Using fp8_e5m2 is deprecated. Please use fp8 instead.")
     if os.getenv("MAX_CONTEXT_LEN_TO_CAPTURE"):
         args["max_seq_len_to_capture"] = int(os.getenv("MAX_CONTEXT_LEN_TO_CAPTURE"))
         logging.warning("Using MAX_CONTEXT_LEN_TO_CAPTURE is deprecated. Please use MAX_SEQ_LEN_TO_CAPTURE instead.")
-        
+    
+    
     # if "gemma-2" in args.get("model", "").lower():
     #     os.environ["VLLM_ATTENTION_BACKEND"] = "FLASHINFER"
     #     logging.info("Using FLASHINFER for gemma-2 model.")

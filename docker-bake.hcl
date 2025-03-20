@@ -3,11 +3,11 @@ variable "PUSH" {
 }
 
 variable "REPOSITORY" {
-  default = "runpod"
+  default = "aechai"
 }
 
 variable "BASE_IMAGE_VERSION" {
-  default = "v2.0.0stable"
+  default = "mistral3-v1.0.0"
 }
 
 group "all" {
@@ -28,5 +28,6 @@ target "worker-1210" {
     BASE_IMAGE_VERSION = "${BASE_IMAGE_VERSION}"
     WORKER_CUDA_VERSION = "12.1.0"
   }
+  platforms = ["linux/amd64"]
   output = ["type=docker,push=${PUSH}"]
 }
