@@ -13,7 +13,6 @@ RENAME_ARGS_MAP = {
 }
 
 DEFAULT_ARGS = {
-    "lora_modules": "u-gpt=usight/entegra-v0-lora",
     "disable_log_stats": os.getenv('DISABLE_LOG_STATS', 'False').lower() == 'true',
     "disable_log_requests": os.getenv('DISABLE_LOG_REQUESTS', 'False').lower() == 'true',
     "gpu_memory_utilization": float(os.getenv('GPU_MEMORY_UTILIZATION', 0.95)),
