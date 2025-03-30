@@ -10,4 +10,3 @@ pydantic-settings
 hf-transfer
 git+https://github.com/huggingface/transformers@v4.49.0-Gemma-3#egg=transformers
 bitsandbytes>=0.45.0
-flash-attn
