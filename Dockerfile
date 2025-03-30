@@ -14,8 +14,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 ENV MAX_JOBS=4
 
 # Install vLLM (switching back to pip installs since issues that required building fork are fixed and space optimization is not as important since caching) and FlashInfer 
-RUN python3 -m pip install git+https://github.com/vllm-project/vllm@v0.8.0rc2
-RUN python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu124/torch2.6
+RUN python3 -m pip install vllm==0.8.2 && \
+    python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3
 
 FROM nvidia/cuda:12.4.0-base-ubuntu22.04
 
