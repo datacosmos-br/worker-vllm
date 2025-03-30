@@ -544,6 +544,7 @@
       "options": [
         { "value": "auto", "label": "auto" },
         { "value": "pt", "label": "pt" },
+        { "value": "gguf", "label": "gguf" },
         { "value": "safetensors", "label": "safetensors" },
         { "value": "npcache", "label": "npcache" },
         { "value": "dummy", "label": "dummy" },
@@ -751,7 +752,8 @@
       { "value": "awq", "label": "AWQ" },
       { "value": "squeezellm", "label": "SqueezeLLM" },
       { "value": "gptq", "label": "GPTQ" },
-      { "value": "bitsandbytes", "label": "bitsandbytes" }
+      { "value": "bitsandbytes", "label": "bitsandbytes" },
+      { "value": "gguf", "label": "GGUF" }
     ]
   },
   "ROPE_SCALING": {
