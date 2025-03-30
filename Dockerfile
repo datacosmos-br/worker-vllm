@@ -1,9 +1,9 @@
-FROM nvidia/cuda:12.4.0-devel-ubuntu22.04 AS builder
+FROM nvidia/cuda:12.1.0-devel-ubuntu22.04 AS builder
 
 RUN apt-get update -y \
     && apt-get install -y python3-pip git
 
-RUN ldconfig /usr/local/cuda-12.4/compat/
+RUN ldconfig /usr/local/cuda-12.1/compat/
 
 # Install Python dependencies
 COPY builder/requirements.txt /requirements.txt
@@ -17,7 +17,7 @@ ENV MAX_JOBS=4
 RUN python3 -m pip install vllm==0.8.2 && \
     python3 -m pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.3
 
-FROM nvidia/cuda:12.4.0-base-ubuntu22.04
+FROM nvidia/cuda:12.1.0-base-ubuntu22.04
 
 RUN apt-get update -y \
     && apt-get install -y python3-pip
